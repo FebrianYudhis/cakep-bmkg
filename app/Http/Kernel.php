@@ -62,6 +62,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'ceklogin' => \App\Http\Middleware\CekLogin::class
+        'ceklogin' => \App\Http\Middleware\CekLogin::class,
+        'kunciapp' => \App\Http\Middleware\Kunci\KunciApp::class,
+        'kunciadmin' => \App\Http\Middleware\Kunci\KunciAdmin::class,
     ];
 }

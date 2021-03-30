@@ -21,7 +21,21 @@ class AuthController extends Controller
 
     public function masukuserpost()
     {
-        dd('Masuk');
+        request()->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (Auth::guard('user')->attempt(request()->only('username', 'password'), request()->filled('remember'))) {
+            request()->session()->regenerate();
+            return redirect()->intended(route('user.dashboard'));
+        } elseif (User::whereUsername(request('username'))->count() == 0) {
+            Alert::error('Salah', 'Username Tidak Ada !');
+            return redirect()->route('user.masuk');
+        } else {
+            Alert::error('Salah', 'Password Salah !');
+            return redirect()->route('user.masuk');
+        }
     }
 
     public function daftaruser()
