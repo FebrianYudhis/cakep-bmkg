@@ -20,7 +20,7 @@ class KunciApp
     {
         if (!Auth::guard('user')->check()) {
             Alert::error('Ditolak', 'Silahkan Login Dahulu !');
-            return redirect()->route('admin.masuk');
+            return redirect()->route('user.masuk');
         }
         return $next($request);
     }

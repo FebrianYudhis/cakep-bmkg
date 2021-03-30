@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -78,7 +79,21 @@ class AuthController extends Controller
 
     public function masukadminpost()
     {
-        dd('Masuk Admin');
+        request()->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (Auth::guard('admin')->attempt(request()->only('username', 'password'), request()->filled('remember'))) {
+            request()->session()->regenerate();
+            return redirect()->intended(route('admin.dashboard'));
+        } elseif (Admin::whereUsername(request('username'))->count() == 0) {
+            Alert::error('Salah', 'Username Tidak Ada !');
+            return redirect()->route('admin.masuk');
+        } else {
+            Alert::error('Salah', 'Password Salah !');
+            return redirect()->route('admin.masuk');
+        }
     }
 
     public function keluar()
