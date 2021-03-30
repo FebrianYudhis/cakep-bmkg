@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <div class="main-wrapper">
         <div class="preloader">
             <div class="lds-ripple">
