@@ -15,7 +15,7 @@ class CreateAbsentsTable extends Migration
     {
         Schema::create('absents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->date('tanggal');
             $table->timestamp('jam_masuk');
             $table->timestamp('jam_keluar');
