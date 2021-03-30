@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'masukuser']);
+Route::middleware('ceklogin')->group(function () {
+    Route::get('/', [AuthController::class, 'masukuser']);
 
-Route::get('/masuk', [AuthController::class, 'masukuser'])->name('user.masuk');
-Route::post('/masuk', [AuthController::class, 'masukuserpost']);
-Route::get('/daftar', [AuthController::class, 'daftaruser'])->name('user.daftar');
-Route::post('/daftar', [AuthController::class, 'daftaruserpost']);
+    Route::get('/masuk', [AuthController::class, 'masukuser'])->name('user.masuk');
+    Route::post('/masuk', [AuthController::class, 'masukuserpost']);
+    Route::get('/daftar', [AuthController::class, 'daftaruser'])->name('user.daftar');
+    Route::post('/daftar', [AuthController::class, 'daftaruserpost']);
 
-Route::get('/kelola', [AuthController::class, 'masukadmin'])->name('admin.masuk');
-Route::post('/kelola', [AuthController::class, 'masukadminpost']);
+    Route::get('/kelola', [AuthController::class, 'masukadmin'])->name('admin.masuk');
+    Route::post('/kelola', [AuthController::class, 'masukadminpost']);
+});
+
+Route::get('/keluar', [AuthController::class, 'keluar'])->name('keluar');
