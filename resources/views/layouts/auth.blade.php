@@ -9,38 +9,31 @@
     <meta name="author" content="Febrian Yudhistira">
 
     <title>{{ $judul }} - {{ env('APP_NAME') }}</title>
-    <link href="{{ asset('vendor/auth/css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/app/css/theme.css') }}" rel="stylesheet">
+
 </head>
 
-<body>
+<body class="bg-secondary">
     @include('sweetalert::alert')
-    <div class="main-wrapper">
-        <div class="preloader">
-            <div class="lds-ripple">
-                <div class="lds-pos"></div>
-                <div class="lds-pos"></div>
-            </div>
-        </div>
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative shadow-lg px-4"
-            style="background:url({{ asset('images/bg/auth-bg.jpg') }}) no-repeat center center;">
-            <div class="auth-box row text-center">
-                <div class="col-lg-5 col-md-3 modal-bg-img" style="background: rgb(190, 81, 81);">
+    <div class="container">
+        <div class="login-wrap">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="#">
+                        <img src="{{ asset('images/logo/logo.png') }}" alt="Cakep Logo">
+                    </a>
                 </div>
-                <div class="col-lg-7 col-md-9 bg-white">
-                    <div class="p-3">
-                        <img src="../assets/images/big/icon.png" alt="wrapkit">
-                        @yield('kontenheader')
-                        @yield('konten')
-                    </div>
+                <div class="login-form">
+                    @yield('konten')
                 </div>
             </div>
         </div>
     </div>
     <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script>
-        $(".preloader").fadeOut();
-    </script>
+    <script src="{{ asset('vendor/app/js/main.js') }}"></script>
+
 </body>
 
 </html>

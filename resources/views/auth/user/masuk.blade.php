@@ -1,10 +1,7 @@
 @extends('layouts.auth')
 
-@section('kontenheader')
-<h2 class="mt-3 text-center">Silahkan Masuk</h2>
-@endsection
-
 @section('konten')
+<h3 class="text-center">Silahkan Masuk</h3>
 <form class="mt-4" method="POST" action="{{ route('user.masuk') }}">
     @csrf
     <div class="row font-weight-bold">
