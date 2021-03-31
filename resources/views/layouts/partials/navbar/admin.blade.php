@@ -7,17 +7,17 @@
 @endsection
 
 @section('navigasi')
-<li class="#">
+<li class="{!! ($aktif == 'dashboard' ) ? 'active' : '' ; !!}">
     <a href="{{ route('admin.dashboard') }}">
         <i class="fas fa-tachometer-alt"></i>
         <span class="bot-line"></span>Dashboard</a>
 </li>
-<li>
+<li class="{!! ($aktif == 'akun' ) ? 'active' : '' ; !!}">
     <a href="#">
         <i class="fas fa-user"></i>
         <span class="bot-line"></span>Akun</a>
 </li>
-<li>
+<li class="{!! ($aktif == 'absen' ) ? 'active' : '' ; !!}">
     <a href="#">
         <i class="fas fa-address-book"></i>
         <span class="bot-line"></span>Absen</a>
@@ -31,7 +31,7 @@
             <img src="{{ asset('images/icon/admin.png') }}" alt="Icon Admin" />
         </div>
         <div class="content">
-            <a class="js-acc-btn" href="#">Nama Disini</a>
+            <a class="js-acc-btn" href="#">{{ $akun->username }}</a>
         </div>
         <div class="account-dropdown js-dropdown">
             <div class="info clearfix">
@@ -41,14 +41,14 @@
                     </a>
                 </div>
                 <div class="content">
-                    <h5 class="name">
-                        <a href="#">Nama Disini</a>
-                    </h5>
+                    <p class="name">
+                        {{ $akun->nama }}
+                    </p>
                 </div>
             </div>
             <div class="account-dropdown__body">
                 <div class="account-dropdown__item">
-                    <a href="#">
+                    <a href="{{ route('admin.gantipassword') }}">
                         <i class="fas fa-key"></i>Ganti Password</a>
                 </div>
             </div>

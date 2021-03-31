@@ -19,6 +19,8 @@
 </head>
 
 <body class="animsition">
+    @include('sweetalert::alert')
+
     @include('layouts.partials.navbar.admin')
 
     <div class="konten mt-4">
