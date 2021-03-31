@@ -53,8 +53,13 @@
                 </div>
             </div>
             <div class="account-dropdown__footer">
-                <a href="#">
-                    <i class="fas fa-power-off"></i>Keluar</a>
+                <a class="dropdown-item" href="{{ route('keluar') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    <i class="fas fa-power-off"></i>Keluar
+                </a>
+                <form id="logout-form" action="{{ route('keluar') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>

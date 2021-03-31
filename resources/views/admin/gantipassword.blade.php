@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('konten')
-<div class="card w-50 mx-auto">
+<div class="card mx-auto">
     <div class="card-header">Ganti Password</div>
     <div class="card-body">
         <form action="{{ route('admin.gantipassword') }}" method="POST">

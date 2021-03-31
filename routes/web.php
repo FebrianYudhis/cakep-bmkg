@@ -26,4 +26,4 @@ Route::middleware('ceklogin')->group(function () {
     Route::post('/kelola', [AuthController::class, 'masukadminpost']);
 });
 
-Route::get('/keluar', [AuthController::class, 'keluar'])->name('keluar');
+Route::post('/keluar', [AuthController::class, 'keluar'])->name('keluar');
