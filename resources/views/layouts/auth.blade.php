@@ -12,9 +12,11 @@
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/app/css/theme.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('vendor/app/css/animsition.min.css') }}">
+
 </head>
 
-<body class="bg-secondary">
+<body class="bg-secondary animsition">
     @include('sweetalert::alert')
     <div class="container">
         <div class="login-wrap">
@@ -30,8 +32,12 @@
             </div>
         </div>
     </div>
+
     <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <script src="{{ asset('vendor/app/js/animsition.min.js') }}"></script>
+
     <script src="{{ asset('vendor/app/js/main.js') }}"></script>
 
 </body>

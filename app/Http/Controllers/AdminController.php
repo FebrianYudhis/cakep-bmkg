@@ -8,6 +8,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-        dd("Halaman Admin");
+        $data = [
+            'judul' => "Dashboard Admin"
+        ];
+        return view('admin.dashboard', $data);
     }
 }
