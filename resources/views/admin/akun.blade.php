@@ -64,7 +64,7 @@
 <div class="card">
     <div class="card-header">List Akun</div>
     <div class="card-body">
-        <table id="akun" class="table table-bordered">
+        <table id="akun" class="table table-bordered table-responsive-sm">
             <thead>
                 <tr>
                     <th>Username</th>

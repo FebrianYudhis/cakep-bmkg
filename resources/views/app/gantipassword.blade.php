@@ -4,7 +4,7 @@
 <div class="card mx-auto">
     <div class="card-header">Ganti Password</div>
     <div class="card-body">
-        <form action="{{ route('admin.gantipassword') }}" method="POST">
+        <form action="{{ route('user.gantipassword') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="password_lama">Password Lama :</label>

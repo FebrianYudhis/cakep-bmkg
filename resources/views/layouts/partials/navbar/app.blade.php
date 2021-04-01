@@ -6,7 +6,7 @@
 </a>
 @endsection
 
-@section('navigasi')
+@section('navigasidesktop')
 <li class="{!! ($aktif == 'dashboard' ) ? 'active' : '' ; !!}">
     <a href="{{ route('user.dashboard') }}">
         <i class="fas fa-tachometer-alt"></i>
@@ -17,6 +17,25 @@
         <i class="fas fa-book"></i>
         <span class="bot-line"></span>Absen</a>
     <ul class="header3-sub-list list-unstyled">
+        <li>
+            <a href="#">Datang</a>
+        </li>
+        <li>
+            <a href="#">Pulang</a>
+        </li>
+    </ul>
+</li>
+@endsection
+
+@section('navigasimobile')
+<li>
+    <a href="{{ route('user.dashboard') }}">
+        <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+</li>
+<li class="has-sub">
+    <a class="js-arrow" href="#">
+        <i class="fas fa-book"></i>Absen</a>
+    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
         <li>
             <a href="#">Datang</a>
         </li>

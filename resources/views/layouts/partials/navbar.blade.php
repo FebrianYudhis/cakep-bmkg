@@ -6,7 +6,7 @@
             </div>
             <div class="header__navbar">
                 <ul class="list-unstyled">
-                    @yield('navigasi')
+                    @yield('navigasidesktop')
                 </ul>
             </div>
             <div class="header__tool">
@@ -32,12 +32,12 @@
     <nav class="navbar-mobile">
         <div class="container-fluid">
             <ul class="navbar-mobile__list list-unstyled">
-                @yield('navigasi')
+                @yield('navigasimobile')
             </ul>
         </div>
     </nav>
 </header>
-<div class="sub-header-mobile-2 d-block d-lg-none">
+<div class="sub-header-mobile-2 d-block d-lg-none shadow-lg">
     <div class="header__tool">
         @yield('profile')
     </div>

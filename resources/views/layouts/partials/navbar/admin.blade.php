@@ -6,7 +6,7 @@
 </a>
 @endsection
 
-@section('navigasi')
+@section('navigasidesktop')
 <li class="{!! ($aktif == 'dashboard' ) ? 'active' : '' ; !!}">
     <a href="{{ route('admin.dashboard') }}">
         <i class="fas fa-tachometer-alt"></i>
@@ -21,6 +21,21 @@
     <a href="#">
         <i class="fas fa-address-book"></i>
         <span class="bot-line"></span>Absen</a>
+</li>
+@endsection
+
+@section('navigasimobile')
+<li>
+    <a href="{{ route('admin.dashboard') }}">
+        <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+</li>
+<li>
+    <a href="{{ route('admin.akun') }}">
+        <i class="fas fa-user"></i>Akun</a>
+</li>
+<li>
+    <a href="#">
+        <i class="fas fa-address-book"></i>Absen</a>
 </li>
 @endsection
 
