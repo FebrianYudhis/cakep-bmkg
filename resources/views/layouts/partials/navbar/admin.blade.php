@@ -13,7 +13,7 @@
         <span class="bot-line"></span>Dashboard</a>
 </li>
 <li class="{!! ($aktif == 'akun' ) ? 'active' : '' ; !!}">
-    <a href="#">
+    <a href="{{ route('admin.akun') }}">
         <i class="fas fa-user"></i>
         <span class="bot-line"></span>Akun</a>
 </li>

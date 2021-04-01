@@ -23,8 +23,8 @@
 
     @include('layouts.partials.navbar.admin')
 
-    <div class="konten mt-4">
-        <div class="container-fluid">
+    <div class="mt-4">
+        <div class="container">
             @yield('konten')
             <div class="shadow-lg py-2 text-center mt-4 wow bounceInUp">
                 <div class="row">

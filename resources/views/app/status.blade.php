@@ -17,8 +17,8 @@
         <div class="card-body">
             <p>Halo <span class="font-italic font-weight-bold">{{ $nama }}</span> anda terdaftar disistem pada <span
                     class="font-italic font-weight-bold">{{ $tanggal }}</span>.</p>
-            <p>Hingga saat ini akun anda memiliki status <span class="font-italic font-weight-bold">{!! ($status == 0) ?
-                    'Belum Aktif' : 'Ditangguhkan' !!}</span>.
+            <p>Hingga saat ini akun anda memiliki status <span class="font-italic font-weight-bold">{!! ($status == 1) ?
+                    'Aktif' : 'Nonaktif' !!}</span>.
             </p>
             <p>Silahkan hubungi administrator untuk informasi lebih lanjut</p>
         </div>

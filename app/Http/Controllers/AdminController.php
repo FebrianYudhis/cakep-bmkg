@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,5 +49,42 @@ class AdminController extends Controller
             Alert::error('Gagal', 'Password Lama Salah');
             return redirect()->route('admin.gantipassword');
         }
+    }
+
+    public function akun()
+    {
+        $data = [
+            'judul' => 'List Akun',
+            'aktif' => 'akun',
+            'akun' => Auth::guard('admin')->user(),
+            'data' => User::get()
+        ];
+        return view('admin.akun', $data);
+    }
+
+    public function aktifkanakun(User $user)
+    {
+        $user->status = 1;
+        $user->save();
+
+        Alert::success('Berhasil', 'Akun Berhasil Diaktifkan');
+        return redirect()->route('admin.akun');
+    }
+
+    public function matikanakun(User $user)
+    {
+        $user->status = 0;
+        $user->save();
+
+        Alert::success('Berhasil', 'Akun Berhasil Dimatikan');
+        return redirect()->route('admin.akun');
+    }
+
+    public function hapusakun(User $user)
+    {
+        $user->delete();
+
+        Alert::success('Berhasil', 'Akun Berhasil Dihapus');
+        return redirect()->route('admin.akun');
     }
 }
