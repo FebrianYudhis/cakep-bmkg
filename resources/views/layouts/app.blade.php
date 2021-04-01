@@ -21,7 +21,11 @@
 <body class="animsition">
     @include('sweetalert::alert')
 
+    @if (Auth::guard('user')->check())
+    @include('layouts.partials.navbar.app')
+    @elseif (Auth::guard('admin')->check())
     @include('layouts.partials.navbar.admin')
+    @endif
 
     <div class="mt-4">
         <div class="container">

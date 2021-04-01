@@ -9,7 +9,12 @@ class AppController extends Controller
 {
     public function index()
     {
-        dd('Halaman Utama');
+        $data = [
+            'judul' => 'Dashboard User',
+            'aktif' => 'dashboard',
+            'akun' => Auth::guard('user')->user()
+        ];
+        return view('app.dashboard', $data);
     }
 
     public function terkunci()
