@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -43,7 +43,6 @@
 
     <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('vendor/fontawesome/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('vendor/app/js/wow.min.js') }}"></script>
     <script src="{{ asset('vendor/app/js/animsition.min.js') }}"></script>
     <script src="{{ asset('vendor/app/js/custom.js') }}"></script>

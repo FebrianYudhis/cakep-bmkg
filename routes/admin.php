@@ -12,8 +12,8 @@ Route::prefix('admin')->middleware(['kunciadmin'])->name('admin.')->group(functi
     Route::get('/akun', [AdminController::class, 'akun'])->name('akun');
 
     Route::name('akun.')->group(function () {
-        Route::get('/akun/{user:username}/aktifkan', [AdminController::class, 'aktifkanakun'])->name('aktifkan');
-        Route::get('/akun/{user:username}/matikan', [AdminController::class, 'matikanakun'])->name('matikan');
-        Route::get('/akun/{user:username}/hapus', [AdminController::class, 'hapusakun'])->name('hapus');
+        Route::patch('/akun/{user:username}/aktifkan', [AdminController::class, 'aktifkanakun'])->name('aktifkan');
+        Route::patch('/akun/{user:username}/matikan', [AdminController::class, 'matikanakun'])->name('matikan');
+        Route::delete('/akun/{user:username}/hapus', [AdminController::class, 'hapusakun'])->name('hapus');
     });
 });

@@ -6,6 +6,7 @@
 
 @push('scripts')
 <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('vendor/sweetalert/sw2.min.js') }}"></script>
 @endpush
 
 @push('scripts')
@@ -33,6 +34,32 @@
 </script>
 @endpush
 
+@push('scripts')
+<script>
+    $('.konfirmasi').on('click',function(e){
+        let tulisan = $(this).text();
+        console.log(tulisan);
+        e.preventDefault();
+        var form = $(this).parents('form');
+        console.log(form);
+        
+        Swal.fire({
+            icon: 'warning',
+            title: tulisan,
+            text: "Apakah anda yakin ?",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya'
+        }).then((result) => {
+            if (result.value) {
+                form.submit();
+            }
+        });
+    });
+</script>
+@endpush
+
 @section('konten')
 <div class="card">
     <div class="card-header">List Akun</div>
@@ -56,11 +83,23 @@
                     <td>{{ $d->created_at }}</td>
                     <td>
                         @if ($d->status == 0)
-                        <a href="{{ route('admin.akun.aktifkan',$d) }}" class="btn btn-primary w-100">Aktifkan</a>
+                        <form action="{{ route('admin.akun.aktifkan',$d) }}" method="POST">
+                            @csrf
+                            @method('patch')
+                            <button type="submit" class="btn btn-primary w-100 konfirmasi">Aktifkan</button>
+                        </form>
                         @elseif ($d->status == 1)
-                        <a href="{{ route('admin.akun.matikan',$d) }}" class="btn btn-primary w-100">Matikan</a>
+                        <form action="{{ route('admin.akun.matikan',$d) }}" method="POST">
+                            @csrf
+                            @method('patch')
+                            <button type="submit" class="btn btn-warning w-100 konfirmasi">Matikan</button>
+                        </form>
                         @endif
-                        <a href="{{ route('admin.akun.hapus',$d) }}" class="btn btn-danger w-100 mt-2">Hapus</a>
+                        <form action="{{ route('admin.akun.hapus',$d) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger w-100 mt-2 konfirmasi">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
