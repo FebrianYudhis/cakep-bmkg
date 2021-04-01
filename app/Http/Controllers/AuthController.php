@@ -100,14 +100,16 @@ class AuthController extends Controller
     {
         if (Auth::guard('user')->check()) {
             Auth::guard('user')->logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+            Alert::success('Berhasil', 'Berhasil Keluar');
+            return redirect()->route('user.masuk');
         } elseif (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+            Alert::success('Berhasil', 'Berhasil Keluar');
+            return redirect()->route('admin.masuk');
         }
-        request()->session()->invalidate();
-
-        request()->session()->regenerateToken();
-
-        Alert::success('Berhasil', 'Berhasil Keluar');
-        return redirect()->route('user.masuk');
     }
 }

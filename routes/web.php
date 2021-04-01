@@ -27,3 +27,8 @@ Route::middleware('ceklogin')->group(function () {
 });
 
 Route::post('/keluar', [AuthController::class, 'keluar'])->name('keluar');
+
+
+Route::get('/test', function () {
+    dd('area test');
+});
