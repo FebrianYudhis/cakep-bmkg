@@ -12,16 +12,16 @@
         <i class="fas fa-tachometer-alt"></i>
         <span class="bot-line"></span>Dashboard</a>
 </li>
-<li class="has-sub">
+<li class="has-sub {!! ($aktif == 'absen') ? 'active' : ''; !!}">
     <a href="#">
         <i class="fas fa-book"></i>
         <span class="bot-line"></span>Absen</a>
     <ul class="header3-sub-list list-unstyled">
         <li>
-            <a href="#">Datang</a>
+            <a href="{{ route('user.absen.datang') }}">Datang</a>
         </li>
         <li>
-            <a href="#">Pulang</a>
+            <a href="{{ route('user.absen.pulang') }}">Pulang</a>
         </li>
     </ul>
 </li>

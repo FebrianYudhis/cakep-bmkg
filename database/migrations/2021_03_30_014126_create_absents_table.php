@@ -17,10 +17,8 @@ class CreateAbsentsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->date('tanggal');
-            $table->timestamp('jam_masuk');
-            $table->timestamp('jam_keluar');
-            $table->string('keterangan');
-            $table->timestamps();
+            $table->timestamp('jam_masuk')->nullable();
+            $table->timestamp('jam_keluar')->nullable();
         });
     }
 
