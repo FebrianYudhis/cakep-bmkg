@@ -37,10 +37,10 @@
         <i class="fas fa-book"></i>Absen</a>
     <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
         <li>
-            <a href="#">Datang</a>
+            <a href="{{ route('user.absen.datang') }}">Datang</a>
         </li>
         <li>
-            <a href="#">Pulang</a>
+            <a href="{{ route('user.absen.pulang') }}">Pulang</a>
         </li>
     </ul>
 </li>
