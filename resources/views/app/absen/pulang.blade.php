@@ -45,8 +45,8 @@
                 <div class="text-danger mt-2">{{ $message }}</div>
                 @enderror
             </div>
-            <p class="mb-4 text-danger font-italic">Anda Akan Absen Pada <span id="hariini"
-                    class="font-weight-bold"></span> Untuk Shift Tanggal <span id="tanggalshift"
+            <p class="mb-4 text-danger font-italic">Anda Akan Absen Pada <span
+                    class="font-weight-bold">{{ $jam }}</span> Untuk Shift Tanggal <span id="tanggalshift"
                     class="font-weight-bold">-</span></p>
             <button type="submit" class="btn btn-primary w-100 konfirmasi">Sudah Pulang</button>
         </form>

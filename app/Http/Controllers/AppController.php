@@ -69,7 +69,8 @@ class AppController extends Controller
         $data = [
             'judul' => 'Absen Datang',
             'aktif' => 'absen',
-            'akun' => Auth::guard('user')->user()
+            'akun' => Auth::guard('user')->user(),
+            'jam' => Carbon::now()
         ];
         return view('app.absen.datang', $data);
     }
@@ -109,7 +110,9 @@ class AppController extends Controller
         $data = [
             'judul' => 'Absen Pulang',
             'aktif' => 'absen',
-            'akun' => Auth::guard('user')->user()
+            'akun' => Auth::guard('user')->user(),
+            'jam' => Carbon::now()
+
         ];
         return view('app.absen.pulang', $data);
     }
