@@ -16,5 +16,6 @@ Route::prefix('app')->middleware(['kunciapp', 'cekakun'])->name('user.')->group(
         Route::put('/absen-datang', [AppController::class, 'catatabsendatang']);
 
         Route::get('/absen-pulang', [AppController::class, 'absenpulang'])->name('pulang');
+        Route::put('/absen-pulang', [AppController::class, 'catatabsenpulang']);
     });
 });

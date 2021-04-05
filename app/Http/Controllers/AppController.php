@@ -106,6 +106,41 @@ class AppController extends Controller
 
     public function absenpulang()
     {
-        dd("Absen Pulang");
+        $data = [
+            'judul' => 'Absen Pulang',
+            'aktif' => 'absen',
+            'akun' => Auth::guard('user')->user()
+        ];
+        return view('app.absen.pulang', $data);
+    }
+
+    public function catatabsenpulang()
+    {
+        request()->validate([
+            'tanggal' => 'required|date|before:' . Carbon::now()->addDay()->toDateString()
+        ]);
+
+        $cek = Absent::whereTanggal(request('tanggal'))->where('user_id', Auth::guard('user')->user()->id);
+        $absen = $cek->first();
+
+        if ($cek->count() > 0) {
+            if ($absen->jam_keluar == null) {
+                $absen->jam_keluar = Carbon::now();
+                $absen->save();
+                Alert::success('Berhasil', 'Absen Pulang Berhasil');
+                return redirect()->route('user.dashboard');
+            } else {
+                Alert::error('Sudah Absen Pulang', 'Anda Sudah Absen Pada ' . Carbon::parse($absen->jam_keluar)->format('d M Y - H:i'));
+                return redirect()->route('user.dashboard');
+            }
+        } else {
+            Absent::create([
+                'user_id' => Auth::guard('user')->user()->id,
+                'tanggal' => request('tanggal'),
+                'jam_keluar' => Carbon::now()
+            ]);
+            Alert::success('Berhasil', 'Absen Pulang Berhasil');
+            return redirect()->route('user.dashboard');
+        }
     }
 }
