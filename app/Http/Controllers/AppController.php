@@ -78,7 +78,7 @@ class AppController extends Controller
     public function catatabsendatang()
     {
         request()->validate([
-            'tanggal' => 'required|date|before:' . Carbon::now()->addDay()->toDateString()
+            'tanggal' => 'required|date|before:' . Carbon::now()->addDay()->toDateString() . '|after:' . Carbon::now()->subDays(2)->toDateString()
         ]);
 
         $cek = Absent::whereTanggal(request('tanggal'))->where('user_id', Auth::guard('user')->user()->id);
@@ -120,7 +120,7 @@ class AppController extends Controller
     public function catatabsenpulang()
     {
         request()->validate([
-            'tanggal' => 'required|date|before:' . Carbon::now()->addDay()->toDateString()
+            'tanggal' => 'required|date|before:' . Carbon::now()->addDay()->toDateString() . '|after:' . Carbon::now()->subDays(2)->toDateString()
         ]);
 
         $cek = Absent::whereTanggal(request('tanggal'))->where('user_id', Auth::guard('user')->user()->id);
