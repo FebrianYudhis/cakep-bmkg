@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absent;
 use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,11 @@ class AdminController extends Controller
         $data = [
             'judul' => 'Dashboard Admin',
             'aktif' => 'dashboard',
-            'akun' => Auth::guard('admin')->user()
+            'akun' => Auth::guard('admin')->user(),
+            'jumlahakun' => User::count(),
+            'jumlahabsen' => Absent::count(),
+            'absendatang' => Absent::whereNull('jam_masuk')->count(),
+            'absenpulang' => Absent::whereNull('jam_keluar')->count(),
         ];
         return view('admin.dashboard', $data);
     }
