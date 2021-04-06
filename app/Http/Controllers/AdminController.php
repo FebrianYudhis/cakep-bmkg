@@ -95,12 +95,24 @@ class AdminController extends Controller
 
     public function absen()
     {
-        $query = Absent::with('user')->limit(40)->get();
+        if (request('mulai') && request('sampai') && request('nama')) {
+            $query = Absent::with('user')->where('tanggal', '>=', request('mulai'))->where('tanggal', '<=', request('sampai'))->where('user_id', request('nama'))->get();
+        } elseif (request('mulai') && request('sampai')) {
+            $query = Absent::with('user')->where('tanggal', '>=', request('mulai'))->where('tanggal', '<=', request('sampai'))->get();
+        } elseif (request('mulai')) {
+            $query = Absent::with('user')->where('tanggal', request('mulai'))->get();
+        } elseif (request('nama')) {
+            $query = Absent::with('user')->where('user_id', request('nama'))->get();
+        } else {
+            $query = Absent::with('user')->limit(40)->get();
+        }
+
         $data = [
             'judul' => 'Absen',
             'aktif' => 'absen',
             'akun' => Auth::guard('admin')->user(),
-            'data' => $query
+            'data' => $query,
+            'nama' => User::where('status', 1)->get()
         ];
         return view('admin.absen', $data);
     }

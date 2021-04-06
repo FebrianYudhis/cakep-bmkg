@@ -42,6 +42,38 @@
 <div class="card">
     <div class="card-header">List Akun</div>
     <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-header">Filter</div>
+            <div class="card-body">
+                <form action="{{ route('admin.absen') }}" method="GET">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="mulai">Mulai :</label>
+                            <input type="date" class="form-control" id="mulai" name="mulai">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="sampai">Sampai :</label>
+                            <input type="date" class="form-control" id="sampai" name="sampai">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="nama">Nama :</label>
+                            <select id="nama" class="form-control" name="nama">
+                                <option disabled selected>--Pilih--</option>
+                                @foreach ($nama as $n)
+                                <option value="{{ $n->id }}">{{ $n->username }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Filter</label>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <table id="akun" class="table table-bordered table-responsive-sm">
             <thead>
                 <tr>
