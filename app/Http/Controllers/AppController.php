@@ -17,7 +17,9 @@ class AppController extends Controller
         $data = [
             'judul' => 'Dashboard User',
             'aktif' => 'dashboard',
-            'akun' => Auth::guard('user')->user()
+            'akun' => Auth::guard('user')->user(),
+            'absendatang' => Absent::where('user_id', Auth::guard('user')->user()->id)->whereNull('jam_masuk')->count(),
+            'absenpulang' => Absent::where('user_id', Auth::guard('user')->user()->id)->whereNull('jam_keluar')->count(),
         ];
         return view('app.dashboard', $data);
     }

@@ -21,7 +21,10 @@
                 { data: 'jam_masuk', name: 'jam_masuk' },
                 { data: 'jam_keluar', name: 'jam_keluar' }
             ],
-            order: [[ 0, 'desc' ]]
+            order: [[ 0, 'desc' ]],
+            "columnDefs": [
+                { "searchable": false, "targets": [1,2] }
+            ]
         });
      });
 </script>
@@ -29,9 +32,39 @@
 
 @section('konten')
 <div class="card">
-    <div class="card-header">Daftar Absen Anda</div>
+    <div class="card-header">Informasi</div>
     <div class="card-body">
-        <table class="table table-bordered table-responsive-sm" id="absen">
+        <marquee>
+            <p class="text-danger font-weight-bold font-italic">Mohon perhatikan kembali tanggal shift sebelum absen |
+                Jika ada kendala dengan aplikasi, silahkan hubungi administrator</p>
+        </marquee>
+        <div class="row mt-3">
+            <div class="col-md-6 col-lg-6">
+                <div class="statistic__item statistic__item--blue">
+                    <h2 class="number text-white">{{ $absendatang }} Kali</h2>
+                    <span class="desc text-white font-italic">Belum Absen Datang</span>
+                    <div class="icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class="statistic__item statistic__item--green">
+                    <h2 class="number text-white">{{ $absenpulang }} Kali</h2>
+                    <span class="desc text-white font-italic">Belum Absen Pulang</span>
+                    <div class="icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header">Daftar Absen Anda</div>
+    <div class="card-body table-responsive-sm">
+        <table class="table table-bordered" id="absen">
             <thead>
                 <tr>
                     <th>Tanggal</th>
