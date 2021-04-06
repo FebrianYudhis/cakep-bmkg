@@ -16,4 +16,7 @@ Route::prefix('admin')->middleware(['kunciadmin'])->name('admin.')->group(functi
         Route::patch('/akun/{user:username}/matikan', [AdminController::class, 'matikanakun'])->name('matikan');
         Route::delete('/akun/{user:username}/hapus', [AdminController::class, 'hapusakun'])->name('hapus');
     });
+
+    Route::get('/absen', [AdminController::class, 'absen'])->name('absen');
+    Route::get('/absen/{absent}/edit', [AdminController::class, 'editabsen'])->name('absen.edit');
 });

@@ -92,4 +92,21 @@ class AdminController extends Controller
         Alert::success('Berhasil', 'Akun Berhasil Dihapus');
         return redirect()->route('admin.akun');
     }
+
+    public function absen()
+    {
+        $query = Absent::with('user')->limit(40)->get();
+        $data = [
+            'judul' => 'Absen',
+            'aktif' => 'absen',
+            'akun' => Auth::guard('admin')->user(),
+            'data' => $query
+        ];
+        return view('admin.absen', $data);
+    }
+
+    public function editabsen(Absent $absent)
+    {
+        dd($absent);
+    }
 }

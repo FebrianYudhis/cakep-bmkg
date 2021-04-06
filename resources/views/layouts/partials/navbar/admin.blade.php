@@ -18,7 +18,7 @@
         <span class="bot-line"></span>Akun</a>
 </li>
 <li class="{!! ($aktif == 'absen' ) ? 'active' : '' ; !!}">
-    <a href="#">
+    <a href="{{ route('admin.absen') }}">
         <i class="fas fa-address-book"></i>
         <span class="bot-line"></span>Absen</a>
 </li>
@@ -34,7 +34,7 @@
         <i class="fas fa-user"></i>Akun</a>
 </li>
 <li>
-    <a href="#">
+    <a href="{{ route('admin.absen') }}">
         <i class="fas fa-address-book"></i>Absen</a>
 </li>
 @endsection
