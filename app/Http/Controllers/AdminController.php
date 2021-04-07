@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Absent;
 use App\Models\User;
 use App\Models\Admin;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -108,7 +109,7 @@ class AdminController extends Controller
         }
 
         $data = [
-            'judul' => 'Absen',
+            'judul' => 'List Absen',
             'aktif' => 'absen',
             'akun' => Auth::guard('admin')->user(),
             'data' => $query,
@@ -119,6 +120,44 @@ class AdminController extends Controller
 
     public function editabsen(Absent $absent)
     {
-        dd($absent);
+        if ($absent->jam_masuk == null) {
+            $absent->jam_masuk = null;
+        } else {
+            $absent->jam_masuk = Carbon::parse($absent->jam_masuk)->format("Y-m-d\TH:i");
+        }
+
+        if ($absent->jam_keluar == null) {
+            $absent->jam_keluar = null;
+        } else {
+            $absent->jam_keluar = Carbon::parse($absent->jam_keluar)->format("Y-m-d\TH:i");
+        }
+
+        $data = [
+            'judul' => 'Edit Absen',
+            'aktif' => 'absen',
+            'akun' => Auth::guard('admin')->user(),
+            'data' => $absent->load('user'),
+        ];
+        return view('admin.editabsen', $data);
+        dd($absent->jam_keluar);
+    }
+
+    public function updateabsen(Absent $absent)
+    {
+        if (request('jam_masuk') == null) {
+            $absent->jam_masuk = null;
+        } else {
+            $absent->jam_masuk = Carbon::parse(request('jam_masuk'))->toDateTime();
+        }
+
+        if (request('jam_keluar') == null) {
+            $absent->jam_keluar = null;
+        } else {
+            $absent->jam_keluar = Carbon::parse(request('jam_keluar'))->toDateTime();
+        }
+
+        $absent->save();
+        Alert::success('Berhasil', 'Berhasil Mengubah Absen ' . '\'' . $absent->user->username . '\'' . ' Pada Tanggal ' . $absent->tanggal);
+        return redirect()->route('admin.absen');
     }
 }
