@@ -6,8 +6,10 @@ use App\Models\Absent;
 use App\Models\User;
 use App\Models\Admin;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
@@ -159,5 +161,56 @@ class AdminController extends Controller
         $absent->save();
         Alert::success('Berhasil', 'Berhasil Mengubah Absen ' . '\'' . $absent->user->username . '\'' . ' Pada Tanggal ' . $absent->tanggal);
         return redirect()->route('admin.absen');
+    }
+
+    public function formulir()
+    {
+        $data = [
+            'judul' => 'Generate Formulir Absen',
+            'aktif' => 'formulir',
+            'akun' => Auth::guard('admin')->user(),
+            'user' => User::all()
+        ];
+        return view('admin.formulir', $data);
+    }
+
+    public function generateformulir()
+    {
+        $id =  Request::post('id');
+        $nama = User::find($id);
+
+        $tanggalAwal = Carbon::parse(Request::post('tanggalAwal'));
+        $tanggalAkhir = Carbon::parse(Request::post('tanggalAkhir'));
+        $perbedaan = $tanggalAwal->diffInDays($tanggalAkhir->addDay());
+
+        $period = CarbonPeriod::create($tanggalAwal, $tanggalAkhir);
+        foreach ($period as $p) {
+            $dates[] = $p->format('Y-m-d');
+        }
+
+        $isi = [];
+        for ($i = 1; $i <= $perbedaan; $i++) {
+            $tanggal = $dates[$i - 1];
+            $data = User::find($id)->absents->where('tanggal', $tanggal)->first();
+
+            if ($data == NULL) {
+                $tambah = [
+                    'i' => $i, 'tanggal' => '-', 'datang' => '-', 'ttdd' => '-', 'pulang' => '-', 'ttdp' => '-', 'keterangan' => 'LIBUR'
+                ];
+                array_push($isi, $tambah);
+            } else {
+                $tambah = [
+                    'i' => $i, 'tanggal' => Carbon::parse($tanggal)->format('d-m-Y'), 'datang' => Carbon::parse($data->jam_masuk)->format('H:i'), 'ttdd' => '', 'pulang' => Carbon::parse($data->jam_keluar)->format('H:i'), 'ttdp' => '', 'keterangan' => ''
+                ];
+                array_push($isi, $tambah);
+            }
+        }
+
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('Absen.docx');
+        $templateProcessor->setValue('nama', $nama->nama);
+        $templateProcessor->cloneRowAndSetValues('i', $isi);
+
+        header("Content-Disposition: attachment; filename=" . $nama->nama . ".docx");
+        $templateProcessor->saveAs('php://output');
     }
 }

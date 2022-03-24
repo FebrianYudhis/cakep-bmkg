@@ -22,6 +22,12 @@
         <i class="fas fa-address-book"></i>
         <span class="bot-line"></span>Absen</a>
 </li>
+
+<li class="{!! ($aktif == 'formulir' ) ? 'active' : '' ; !!}">
+    <a href="{{ route('admin.formulir') }}">
+        <i class="fas fa-id-card"></i>
+        <span class="bot-line"></span>Formulir Absen</a>
+</li>
 @endsection
 
 @section('navigasimobile')
@@ -36,6 +42,10 @@
 <li>
     <a href="{{ route('admin.absen') }}">
         <i class="fas fa-address-book"></i>Absen</a>
+</li>
+<li>
+    <a href="{{ route('admin.formulir') }}">
+        <i class="fas fa-id-card"></i>Formulir Absen</a>
 </li>
 @endsection
 

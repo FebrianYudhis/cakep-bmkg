@@ -20,4 +20,7 @@ Route::prefix('admin')->middleware(['kunciadmin'])->name('admin.')->group(functi
     Route::get('/absen', [AdminController::class, 'absen'])->name('absen');
     Route::get('/absen/{absent}/edit', [AdminController::class, 'editabsen'])->name('absen.edit');
     Route::put('/absen/{absent}/edit', [AdminController::class, 'updateabsen']);
+
+    Route::get('/formulir', [AdminController::class, 'formulir'])->name('formulir');
+    Route::post('/formulir', [AdminController::class, 'generateformulir']);
 });
