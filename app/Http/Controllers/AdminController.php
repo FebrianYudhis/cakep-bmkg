@@ -191,21 +191,35 @@ class AdminController extends Controller
         $isi = [];
         for ($i = 1; $i <= $perbedaan; $i++) {
             $tanggal = $dates[$i - 1];
-            $data = User::find($id)->absents->where('tanggal', $tanggal)->first();
+            $cari = User::find($id)->absents->where('tanggal', $tanggal)->toArray();
 
-            if ($data == NULL) {
-                $tambah = [
-                    'i' => $i, 'tanggal' => '-', 'datang' => '-', 'ttdd' => '-', 'pulang' => '-', 'ttdp' => '-', 'keterangan' => 'LIBUR'
-                ];
-                array_push($isi, $tambah);
+            if ($cari != NULL) {
+                foreach ($cari as $data) {
+
+                    if ($data['jam_masuk'] == NULL) {
+                        $jam_masuk = '-';
+                    } else {
+                        $jam_masuk = Carbon::parse($data['jam_masuk'])->format('H:i');
+                    }
+
+                    if ($data['jam_keluar'] == NULL) {
+                        $jam_keluar = '-';
+                    } else {
+                        $jam_keluar = Carbon::parse($data['jam_keluar'])->format('H:i');
+                    }
+
+                    $tambah = [
+                        'i' => $i, 'tanggal' => Carbon::parse($tanggal)->format('d-m-Y'), 'datang' => $jam_masuk, 'ttdd' => '', 'pulang' => $jam_keluar, 'ttdp' => '', 'keterangan' => ''
+                    ];
+                    array_push($isi, $tambah);
+                }
             } else {
                 $tambah = [
-                    'i' => $i, 'tanggal' => Carbon::parse($tanggal)->format('d-m-Y'), 'datang' => Carbon::parse($data->jam_masuk)->format('H:i'), 'ttdd' => '', 'pulang' => Carbon::parse($data->jam_keluar)->format('H:i'), 'ttdp' => '', 'keterangan' => ''
+                    'i' => $i, 'tanggal' => Carbon::parse($tanggal)->format('d-m-Y'), 'datang' => '-', 'ttdd' => '-', 'pulang' => '-', 'ttdp' => '-', 'keterangan' => 'LIBUR'
                 ];
                 array_push($isi, $tambah);
             }
         }
-
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('Absen.docx');
         $templateProcessor->setValue('nama', $nama->nama);
         $templateProcessor->cloneRowAndSetValues('i', $isi);
