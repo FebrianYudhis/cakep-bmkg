@@ -65,7 +65,6 @@ class Kernel extends HttpKernel
         'ceklogin' => \App\Http\Middleware\CekLogin::class,
         'kunciapp' => \App\Http\Middleware\Kunci\KunciApp::class,
         'kunciadmin' => \App\Http\Middleware\Kunci\KunciAdmin::class,
-        'cekakun' => \App\Http\Middleware\CekAkunUser::class,
-        'isloggedin' => \App\Http\Middleware\IsLoggedIn::class
+        'cekakun' => \App\Http\Middleware\CekAkunUser::class
     ];
 }
