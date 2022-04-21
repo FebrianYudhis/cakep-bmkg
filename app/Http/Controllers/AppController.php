@@ -26,6 +26,9 @@ class AppController extends Controller
 
     public function terkunci()
     {
+        if (Auth::guard('user')->user()->status == 1) {
+            return redirect()->route('user.dashboard');
+        }
         $data = [
             'judul' => 'Terkunci',
             'aktif' => '',

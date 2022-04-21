@@ -17,9 +17,9 @@ class CekAkunUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('user')->user()->status == 0) {
-            return redirect()->route('user.terkunci');
+        if (Auth::guard('user')->user()->status == 1) {
+            return $next($request);
         }
-        return $next($request);
+        return redirect()->route('user.terkunci');
     }
 }
