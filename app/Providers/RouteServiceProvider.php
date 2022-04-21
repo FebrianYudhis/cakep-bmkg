@@ -47,7 +47,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('web')
+            Route::middleware(['web', 'isloggedin'])
                 ->namespace($this->namespace)
                 ->group(base_path('routes/app.php'));
 
