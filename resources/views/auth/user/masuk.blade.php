@@ -24,14 +24,7 @@
             </div>
         </div>
         <div class="col-lg-12">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                    {{ old('remember') ? 'checked' : '' }}>
-
-                <label class="form-check-label" for="remember">
-                    Ingat Saya
-                </label>
-            </div>
+            <div class="alert alert-danger"><i>Hanya Dapat Masuk Pada Satu Browser / Perangkat</i></div>
         </div>
         <div class="col-lg-12 text-center mt-4">
             <button type="submit" class="btn btn-block btn-dark">Masuk</button>

@@ -27,9 +27,18 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::guard('user')->attempt(request()->only('username', 'password'), request()->filled('remember'))) {
-            request()->session()->regenerate();
-            return redirect()->intended(route('user.dashboard'));
+        if (Auth::guard('user')->attempt(request()->only('username', 'password'), true)) {
+            if (Auth::guard('user')->user()->is_login == 1) {
+                Auth::guard('user')->logout();
+                Alert::error('Gagal', 'Anda Masuk Pada Browser / Perangkat Lain, Hubungi Admin Untuk Informasi !');
+                return redirect()->route('user.masuk');
+            } else {
+                $user = Auth::guard('user')->user();
+                $user->is_login = 1;
+                $user->save();
+                request()->session()->regenerate();
+                return redirect()->intended(route('user.dashboard'));
+            }
         } elseif (User::whereUsername(request('username'))->count() == 0) {
             Alert::error('Salah', 'Username Tidak Ada !');
             return redirect()->route('user.masuk');
@@ -60,12 +69,10 @@ class AuthController extends Controller
             'username' => request('username'),
             'nama' => request('nama'),
             'password' => Hash::make(request('password')),
-            'status' => 0
         ]);
 
-        Auth::guard()->login($user);
-
-        return redirect()->intended(route('user.dashboard'));
+        Alert::success('Berhasil', 'Akun Berhasil Dibuat, Silahkan Masuk !');
+        return redirect()->route('user.masuk');
     }
 
     public function masukadmin()
