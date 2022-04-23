@@ -28,12 +28,20 @@ class AuthController extends Controller
         ]);
 
         if (Auth::guard('user')->attempt(request()->only('username', 'password'), true)) {
-            if (Auth::guard('user')->user()->is_login == 1) {
-                Auth::guard('user')->logout();
-                Alert::error('Gagal', 'Anda Masuk Pada Browser / Perangkat Lain, Hubungi Admin Untuk Informasi !');
-                return redirect()->route('user.masuk');
+            $user = Auth::guard('user')->user();
+            if ($user->is_login == 1) {
+                if ($user->user_agent == null or ($user->user_agent == request()->userAgent())) {
+                    $user->user_agent = request()->userAgent();
+                    $user->save();
+                    request()->session()->regenerate();
+                    return redirect()->intended(route('user.dashboard'));
+                } else {
+                    Auth::guard('user')->logout();
+                    Alert::error('Gagal', 'Anda Sudah Masuk !');
+                    return redirect()->route('user.masuk');
+                }
             } else {
-                $user = Auth::guard('user')->user();
+                $user->user_agent = request()->userAgent();
                 $user->is_login = 1;
                 $user->save();
                 request()->session()->regenerate();

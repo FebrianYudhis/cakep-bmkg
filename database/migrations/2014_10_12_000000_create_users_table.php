@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('status')->nullable();
             $table->integer('is_login')->nullable();
+            $table->string('user_agent')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
