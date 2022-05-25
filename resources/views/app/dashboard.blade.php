@@ -42,7 +42,7 @@
             <div class="col-md-6 col-lg-6">
                 <div class="statistic__item statistic__item--blue">
                     <h2 class="number text-white">{{ $absendatang }} Kali</h2>
-                    <span class="desc text-white font-italic">Belum Absen Datang</span>
+                    <span class="desc text-white font-italic">Belum Absen Datang (Bulan Ini)</span>
                     <div class="icon">
                         <i class="fas fa-sign-in-alt"></i>
                     </div>
@@ -51,7 +51,7 @@
             <div class="col-md-6 col-lg-6">
                 <div class="statistic__item statistic__item--green">
                     <h2 class="number text-white">{{ $absenpulang }} Kali</h2>
-                    <span class="desc text-white font-italic">Belum Absen Pulang</span>
+                    <span class="desc text-white font-italic">Belum Absen Pulang (Bulan Ini)</span>
                     <div class="icon">
                         <i class="fas fa-sign-out-alt"></i>
                     </div>
