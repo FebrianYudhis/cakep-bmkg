@@ -75,7 +75,8 @@ class AppController extends Controller
             'judul' => 'Absen Datang',
             'aktif' => 'absen',
             'akun' => Auth::guard('user')->user(),
-            'jam' => Carbon::now()
+            'jam' => Carbon::now(),
+            'tanggal' => Carbon::now()->format('Y-m-d')
         ];
         return view('app.absen.datang', $data);
     }
@@ -116,8 +117,8 @@ class AppController extends Controller
             'judul' => 'Absen Pulang',
             'aktif' => 'absen',
             'akun' => Auth::guard('user')->user(),
-            'jam' => Carbon::now()
-
+            'jam' => Carbon::now(),
+            'tanggal' => Absent::orderByDesc('tanggal')->whereNull('jam_keluar')->first()
         ];
         return view('app.absen.pulang', $data);
     }
