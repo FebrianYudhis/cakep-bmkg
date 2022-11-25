@@ -40,6 +40,7 @@
         </marquee>
         <div class="row mt-3">
             <div class="col-md-6 col-lg-6">
+                <a class="btn btn-warning w-100" href="{{ route('user.absen.datang') }}">Datang</a>
                 <div class="statistic__item statistic__item--blue">
                     <h2 class="number text-white">{{ $absendatang }} Kali</h2>
                     <span class="desc text-white font-italic">Belum Absen Datang (Bulan Ini)</span>
@@ -49,6 +50,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-6">
+                <a class="btn btn-warning w-100" href="{{ route('user.absen.pulang') }}">Pulang</a>
                 <div class="statistic__item statistic__item--green">
                     <h2 class="number text-white">{{ $absenpulang }} Kali</h2>
                     <span class="desc text-white font-italic">Belum Absen Pulang (Bulan Ini)</span>
