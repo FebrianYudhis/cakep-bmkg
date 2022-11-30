@@ -82,6 +82,11 @@
                     <td>{!! ($d->status == 1) ? 'Aktif' : 'Nonaktif'; !!}</td>
                     <td>{{ $d->created_at }}</td>
                     <td>
+                        <form action="{{ route('admin.akun.resetmasuk',$d) }}" method="POST">
+                            @csrf
+                            @method('patch')
+                            <button type="submit" class="btn btn-primary w-100 mb-2 konfirmasi">Reset Masuk</button>
+                        </form>
                         @if ($d->status == 0)
                         <form action="{{ route('admin.akun.aktifkan',$d) }}" method="POST">
                             @csrf

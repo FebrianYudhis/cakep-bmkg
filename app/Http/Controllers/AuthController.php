@@ -37,7 +37,7 @@ class AuthController extends Controller
                     return redirect()->intended(route('user.dashboard'));
                 } else {
                     Auth::guard('user')->logout();
-                    Alert::error('Gagal', 'Anda Sudah Masuk !');
+                    Alert::error('Gagal', 'Anda Sudah Masuk, Silahkan Hubungi Administrator !');
                     return redirect()->route('user.masuk');
                 }
             } else {

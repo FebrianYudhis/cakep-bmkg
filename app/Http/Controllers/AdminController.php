@@ -70,6 +70,16 @@ class AdminController extends Controller
         return view('admin.akun', $data);
     }
 
+    public function resetmasuk(User $user)
+    {
+        $user->is_login = null;
+        $user->user_agent = null;
+        $user->save();
+
+        Alert::success('Berhasil', 'Reset Masuk Akun Berhasil Dilakukan');
+        return redirect()->route('admin.akun');
+    }
+
     public function aktifkanakun(User $user)
     {
         $user->status = 1;
