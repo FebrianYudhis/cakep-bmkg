@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
         Admin::create([
             'username' => 'admin',
             'nama' => 'Admin Aplikasi',
-            'password' => '$2y$10$tM9jRwwyxGYztNyOMjD1seTooWnkoiVbcuoy5EiCbu8bqjc7rgzJ.',
+            'password' => '$2y$10$tM9jRwwyxGYztNyOMjD1seTooWnkoiVbcuoy5EiCbu8bqjc7rgzJ.' // admin123
         ]);
     }
 }

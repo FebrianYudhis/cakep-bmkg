@@ -2,3 +2,7 @@
 - Initial Version
 - Untrack File "composer.lock"
 - Mengganti Template Word
+
+#1.0.1
+- Memperbaiki Struktur Logika Presensi
+- Mempersiapkan Tampilan Untuk Tetap Presensi
