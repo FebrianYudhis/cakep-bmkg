@@ -6,3 +6,6 @@
 #1.0.1
 - Memperbaiki Struktur Logika Presensi
 - Mempersiapkan Tampilan Untuk Tetap Presensi
+
+#1.0.2
+- Memperbaiki Struktur Logika Presensi

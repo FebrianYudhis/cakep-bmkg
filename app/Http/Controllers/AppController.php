@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Absent;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -81,24 +82,35 @@ class AppController extends Controller
         return view('app.absen.datang', $data);
     }
 
-    public function catatabsendatang()
+    public function catatabsendatang(Request $request)
     {
-        request()->validate([
+        $request->validate([
             'tanggal' => 'required|date|before:' . Carbon::now()->addDay()->toDateString() . '|after:' . Carbon::now()->subDays(2)->toDateString()
         ]);
 
-        $cek = Absent::whereTanggal(request('tanggal'))->where('user_id', Auth::guard('user')->user()->id);
-        $absen = $cek->first();
+        $cek = Absent::where('tanggal', request('tanggal'))->where('user_id', Auth::guard('user')->user()->id);
 
         if ($cek->count() > 0) {
-            if ($absen->jam_masuk == null) {
+            $absen = $cek->where('jam_masuk', null)->first();
+
+            if ($absen != null) {
                 $absen->jam_masuk = Carbon::now();
                 $absen->save();
                 Alert::success('Berhasil', 'Absen Masuk Berhasil');
                 return redirect()->route('user.dashboard');
             } else {
-                Alert::error('Sudah Absen Masuk', 'Anda Sudah Absen Pada ' . Carbon::parse($absen->jam_masuk)->format('d M Y - H:i'));
-                return redirect()->route('user.dashboard');
+                if (isset($request->tetapPresensi)) {
+                    Absent::create([
+                        'user_id' => Auth::guard('user')->user()->id,
+                        'tanggal' => request('tanggal'),
+                        'jam_masuk' => Carbon::now()
+                    ]);
+                    Alert::success('Berhasil', 'Absen Masuk Berhasil');
+                    return redirect()->route('user.dashboard');
+                } else {
+                    Alert::error('Absen Ditolak', 'Anda Sudah Absen');
+                    return redirect()->route('user.dashboard');
+                }
             }
         } else {
             Absent::create([
@@ -123,24 +135,35 @@ class AppController extends Controller
         return view('app.absen.pulang', $data);
     }
 
-    public function catatabsenpulang()
+    public function catatabsenpulang(Request $request)
     {
-        request()->validate([
+        $request->validate([
             'tanggal' => 'required|date|before:' . Carbon::now()->addDay()->toDateString() . '|after:' . Carbon::now()->subDays(2)->toDateString()
         ]);
 
-        $cek = Absent::whereTanggal(request('tanggal'))->where('user_id', Auth::guard('user')->user()->id);
-        $absen = $cek->first();
+        $cek = Absent::where('tanggal', request('tanggal'))->where('user_id', Auth::guard('user')->user()->id);
 
         if ($cek->count() > 0) {
-            if ($absen->jam_keluar == null) {
+            $absen = $cek->where('jam_keluar', null)->first();
+
+            if ($absen != null) {
                 $absen->jam_keluar = Carbon::now();
                 $absen->save();
                 Alert::success('Berhasil', 'Absen Pulang Berhasil');
                 return redirect()->route('user.dashboard');
             } else {
-                Alert::error('Sudah Absen Pulang', 'Anda Sudah Absen Pada ' . Carbon::parse($absen->jam_keluar)->format('d M Y - H:i'));
-                return redirect()->route('user.dashboard');
+                if (isset($request->tetapPresensi)) {
+                    Absent::create([
+                        'user_id' => Auth::guard('user')->user()->id,
+                        'tanggal' => request('tanggal'),
+                        'jam_keluar' => Carbon::now()
+                    ]);
+                    Alert::success('Berhasil', 'Absen Pulang Berhasil');
+                    return redirect()->route('user.dashboard');
+                } else {
+                    Alert::error('Absen Ditolak', 'Anda Sudah Absen');
+                    return redirect()->route('user.dashboard');
+                }
             }
         } else {
             Absent::create([
