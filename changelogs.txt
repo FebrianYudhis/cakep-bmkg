@@ -9,3 +9,7 @@
 
 #1.0.2
 - Memperbaiki Struktur Logika Presensi
+
+#1.0.3
+- Menambahkan Waktu Presensi Supaya Berjalan Pada Menu Absen Datang dan Absen Pulang
+- Membersihkan Kode

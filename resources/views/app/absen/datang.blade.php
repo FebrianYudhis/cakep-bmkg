@@ -9,10 +9,8 @@
     <script>
         $('.konfirmasi').on('click', function(e) {
             let tulisan = $(this).text();
-            console.log(tulisan);
             e.preventDefault();
             var form = $(this).parents('form');
-            console.log(form);
 
             Swal.fire({
                 icon: 'warning',
@@ -27,6 +25,21 @@
                     form.submit();
                 }
             });
+        });
+
+        $(document).ready(function() {
+            var jamServer = $('#jamServer').text();
+            var jamClient = new Date(Date.parse(jamServer));
+
+            setInterval(() => {
+                jamClient.setSeconds(jamClient.getSeconds() + 1);
+                displayTime(jamClient);
+            }, 1000);
+
+            function displayTime(date) {
+                var localtime = new Date(date.getTime() + 7 * 60 * 60 * 1000);
+                $('#jamServer').text(localtime.toISOString().slice(0, 19).replace("T", " "));
+            }
         });
     </script>
 @endpush
@@ -52,8 +65,8 @@
                         Tetap Presensi
                     </label>
                 </div>
-                <p class="mb-4 text-danger font-italic">Anda Akan Absen Pada <span
-                        class="font-weight-bold">{{ $jam }}</span> Untuk Shift Tanggal <span id="tanggalshift"
+                <p class="mb-4 text-danger font-italic">Anda Akan Absen Pada <span class="font-weight-bold"
+                        id="jamServer">{{ $jam }}</span> Untuk Shift Tanggal <span id="tanggalshift"
                         class="font-weight-bold">{{ $tanggal }}</span></p>
                 <button type="submit" class="btn btn-primary w-100 konfirmasi">Sudah Datang</button>
             </form>
