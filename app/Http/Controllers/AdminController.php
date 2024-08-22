@@ -219,19 +219,32 @@ class AdminController extends Controller
                     }
 
                     $tambah = [
-                        'i' => $i, 'tanggal' => Carbon::parse($tanggal)->format('d-m-Y'), 'datang' => $jam_masuk, 'ttdd' => '', 'pulang' => $jam_keluar, 'ttdp' => '', 'keterangan' => ''
+                        'i' => $i,
+                        'tanggal' => Carbon::parse($tanggal)->format('d-m-Y'),
+                        'datang' => $jam_masuk,
+                        'ttdd' => '',
+                        'pulang' => $jam_keluar,
+                        'ttdp' => '',
+                        'keterangan' => ''
                     ];
                     array_push($isi, $tambah);
                 }
             } else {
                 $tambah = [
-                    'i' => $i, 'tanggal' => Carbon::parse($tanggal)->format('d-m-Y'), 'datang' => '-', 'ttdd' => '-', 'pulang' => '-', 'ttdp' => '-', 'keterangan' => 'LIBUR'
+                    'i' => $i,
+                    'tanggal' => Carbon::parse($tanggal)->format('d-m-Y'),
+                    'datang' => '-',
+                    'ttdd' => '-',
+                    'pulang' => '-',
+                    'ttdp' => '-',
+                    'keterangan' => 'LIBUR'
                 ];
                 array_push($isi, $tambah);
             }
         }
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('Absen.docx');
         $templateProcessor->setValue('nama', $nama->nama);
+        $templateProcessor->setValue('nrp', $nama->no_identity);
         $templateProcessor->cloneRowAndSetValues('i', $isi);
 
         header("Content-Disposition: attachment; filename=" . $nama->nama . ".docx");

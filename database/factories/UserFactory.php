@@ -25,6 +25,7 @@ class UserFactory extends Factory
         return [
             'username' => $this->faker->userName(),
             'nama' => $this->faker->name(),
+            'no_identity' => $this->faker->numberBetween(10000, 99999),
             'password' => '$2y$10$rVZ2r1cEEqXdDYne/QMeQOpKEAmyuQIbUKitjCrmvgUCsGiXqZ27u', // password
             'status' => rand(0, 1),
         ];
