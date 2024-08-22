@@ -13,3 +13,6 @@
 #1.0.3
 - Menambahkan Waktu Presensi Supaya Berjalan Pada Menu Absen Datang dan Absen Pulang
 - Membersihkan Kode
+
+#1.1.0
+- Menambahkan Satu Kolom Baru pada Tabel 'users'

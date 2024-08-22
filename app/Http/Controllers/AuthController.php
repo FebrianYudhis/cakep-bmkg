@@ -70,12 +70,14 @@ class AuthController extends Controller
         request()->validate([
             'nama' => 'required|string|max:255',
             'username' => 'required|alpha_dash|min:5|unique:users',
+            'noidentity' => 'required|max:20',
             'password' => 'required|confirmed|min:8'
         ]);
 
         $user = User::create([
             'username' => request('username'),
             'nama' => request('nama'),
+            'no_identity' => request('noidentity'),
             'password' => Hash::make(request('password')),
         ]);
 

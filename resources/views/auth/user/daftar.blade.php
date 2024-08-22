@@ -25,6 +25,15 @@
         </div>
         <div class="col-lg-12">
             <div class="form-group">
+                <input type="text" class="form-control" id="noidentity" placeholder="Masukkan Nomor Identitas" name="noidentity"
+                    value="{{ old('noidentity') }}" required>
+                @error('noidentity')
+                <div class="text-danger mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
                 <input type="password" class="form-control" id="password" placeholder="Masukkan Password Anda"
                     name="password" value="{{ old('password') }}" required>
                 @error('password')
